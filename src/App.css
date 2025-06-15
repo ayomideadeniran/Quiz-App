@@ -7,18 +7,28 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
   box-sizing: border-box;
 }
 
 .quiz-container {
   background-color: #ffffff;
-  padding: 25px 30px;
+  padding: 20px; /* Default padding, will adjust for larger screens */
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  /* width: 90%; */ /* Removed this line */
+  width: 100%;    /* Allow container to fill the centered #root div */
   max-width: 600px;
+  box-sizing: border-box; /* Ensures padding is included within the width/max-width */
   text-align: center;
+  display: flex; /* For better internal alignment if needed */
+  flex-direction: column;
+}
+
+.quiz-header h1 {
+  color: #3498db; /* Blue, matching action buttons */
+  margin-top: 0;
+  margin-bottom: 20px; /* Adjusted margin */
+  font-size: 2em;
 }
 
 .quiz-container.loading {
@@ -28,7 +38,7 @@ body {
 }
 
 .question-section {
-  margin-bottom: 25px;
+  margin-bottom: 20px; /* Adjusted spacing */
 }
 
 .question-count {
@@ -54,7 +64,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px; /* Space between option buttons */
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Adjusted spacing */
 }
 
 .quiz-button {
@@ -65,7 +75,7 @@ body {
   background-color: #f9f9f9;
   color: #333;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease; /* Added box-shadow transition */
   text-align: left;
   width: 100%;
   box-sizing: border-box;
@@ -74,10 +84,12 @@ body {
 .quiz-button:hover:not(:disabled) {
   background-color: #e9e9e9;
   border-color: #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow on hover */
 }
 
 .quiz-button:active:not(:disabled) {
   transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Slightly less shadow on active */
 }
 
 .quiz-button:disabled {
@@ -89,18 +101,21 @@ body {
   background-color: #2ecc71; /* Green */
   color: white;
   border-color: #27ae60; /* Darker green */
+  font-weight: bold;
 }
 
 .option-button.incorrect {
   background-color: #e74c3c; /* Red */
   color: white;
   border-color: #c0392b; /* Darker red */
+  font-weight: bold;
 }
 
 .feedback-message {
   margin-top: 15px;
   font-size: 1em;
   font-weight: bold;
+  min-height: 1.5em; /* Reserve space to prevent layout shift */
 }
 .feedback-message.correct-text { color: #27ae60; }
 .feedback-message.incorrect-text { color: #c0392b; }
@@ -112,18 +127,57 @@ body {
   font-weight: bold;
   margin-top: 20px;
   padding: 12px 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .next-button:hover, .restart-button:hover {
   background-color: #2980b9; /* Darker blue */
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
 .score-screen h2 {
   color: #2c3e50;
   margin-bottom: 15px;
+  font-size: 1.8em;
 }
+.score-screen .quiz-header h1 { /* Ensure header in score screen is also styled if it exists there */
+    margin-bottom: 10px; /* Less margin if needed in score screen */
+}
+
 
 .score-screen p {
   font-size: 1.2em;
   margin-bottom: 25px;
+  color: #555;
+}
+
+/* Responsive adjustments */
+
+/* For tablets and larger phones */
+@media (min-width: 481px) {
+  .quiz-container {
+    padding: 25px 30px;
+  }
+
+  .quiz-header h1 {
+    font-size: 2.2em;
+    margin-bottom: 25px;
+  }
+
+  .question-text {
+    font-size: 1.5em;
+  }
+
+  .quiz-button {
+    padding: 14px 18px;
+    font-size: 1.05em;
+  }
+}
+
+/* For small desktops and larger tablets */
+@media (min-width: 769px) {
+  .quiz-container {
+    padding: 30px 35px;
+    width: 100%; /* Allow it to take max-width */
+  }
 }
